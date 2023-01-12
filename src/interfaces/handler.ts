@@ -1,13 +1,13 @@
-import {Request, Response, NextFunction} from "express"
+import { Request, Response, NextFunction } from 'express';
 export interface middlewareInterface {
   name: string;
   position: string;
-  run: (req:Request, res:Response,  next: NextFunction) => void
+  run: (req: Request, res: Response, next: NextFunction) => void;
 }
 
 export interface FileRouteInterface {
   method: string;
-  run: (req:Request, res:Response) => void
+  run: (req: Request, res: Response) => void;
 }
 
 export interface FileSystemMiddlewareInterface {

@@ -1,8 +1,8 @@
-import { Express, Handler, RequestHandler } from "express";
-import { readdirSync, lstatSync } from "fs";
-import path from "path";
+import { Express, Handler, RequestHandler } from 'express';
+import { readdirSync, lstatSync } from 'fs';
+import path from 'path';
 
-import type { FileSystemMiddlewareInterface } from "../interfaces/handler";
+import type { FileSystemMiddlewareInterface } from '../interfaces/handler';
 
 export class FileSystemRouter {
   private options: FileSystemMiddlewareInterface;
@@ -28,47 +28,46 @@ export class FileSystemRouter {
   }
 
   private async logFile(file: string, path: string, app: Express) {
-    if (file.endsWith(".js") || file.endsWith(".ts")) {
+    if (file.endsWith('.js') || file.endsWith('.ts')) {
       const code = await import(`${path}/${file}`);
 
-      if (!code.route) throw new Error("Sunrit implement");
+      if (!code.route) throw new Error('Sunrit implement');
 
       const regex = /\[(\w+)\]/;
       const result = file.match(regex);
 
-      if (result) file = ":" + result[1];
+      if (result) file = ':' + result[1];
 
       let rmPath = path
-        .replace(process.cwd(), "")
-        .replace("/" + this.options.routerDir, "");
+        .replace(process.cwd(), '')
+        .replace('/' + this.options.routerDir, '');
 
-      let routePath: string = "";
+      let routePath: string = '';
 
-      routePath = rmPath + "/" + file.replace(".ts", "");
-      const method: string = code.route.method
-      const handler:any = code.route.run
-      console.log(handler as Handler)
-      switch(method) {
-        case "GET":
-            app.get(routePath, handler as RequestHandler)
-            console.log(method)
-            return
-        case "POST":
-            app.post(routePath, handler as RequestHandler)
-            console.log(method)
-            return
-        case "PUT": 
-            app.put(routePath, handler as RequestHandler)
-            console.log(method)
-            return
-        case "DELETE":
-            app.delete(routePath, handler as RequestHandler)
-            console.log(method)
-            return
+      routePath = rmPath + '/' + file.replace('.ts', '');
+      const method: string = code.route.method;
+      const handler: any = code.route.run;
+      console.log(handler as Handler);
+      switch (method) {
+        case 'GET':
+          app.get(routePath, handler as RequestHandler);
+          console.log(method);
+          return;
+        case 'POST':
+          app.post(routePath, handler as RequestHandler);
+          console.log(method);
+          return;
+        case 'PUT':
+          app.put(routePath, handler as RequestHandler);
+          console.log(method);
+          return;
+        case 'DELETE':
+          app.delete(routePath, handler as RequestHandler);
+          console.log(method);
+          return;
         default:
-            console.log("Bad Method")
-            return
-
+          console.log('Bad Method');
+          return;
       }
     }
   }

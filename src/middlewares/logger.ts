@@ -1,20 +1,18 @@
-import { Response, Request, NextFunction } from "express";
-import { middlewareInterface } from "src/interfaces/handler";
-import { cristal } from "gradient-string";
+import { Response, Request, NextFunction } from 'express';
+import { middlewareInterface } from 'src/interfaces/handler';
+import { cristal } from 'gradient-string';
 export const middleware: middlewareInterface = {
-  name: "basicLogger",
-  position: "before",
-  run: (req:Request, _:Response, __: NextFunction): void => {
-    console.log(cristal("------------------------------"));
+  name: 'basicLogger',
+  position: 'before',
+  run: (req: Request, _: Response, __: NextFunction): void => {
+    console.log(cristal('------------------------------'));
     const time = new Date().toISOString();
     console.log(
       cristal(
-        `Time: ${time}\nMethod: ${req.method}\nPath: ${req.path}\nParams: ${
-          req.params
-        }\nHeaders: ${req.headers}}`
+        `Time: ${time}\nMethod: ${req.method}\nPath: ${req.path}\nParams: ${req.params}\nHeaders: ${req.headers}}`
       )
     );
 
-    console.log(cristal("------------------------------\n"));
-        }
+    console.log(cristal('------------------------------\n'));
+  }
 };
