@@ -1,4 +1,4 @@
-import { Express } from "express";
+import { Express, Handler, RequestHandler } from "express";
 import { readdirSync, lstatSync } from "fs";
 import path from "path";
 
@@ -45,8 +45,31 @@ export class FileSystemRouter {
       let routePath: string = "";
 
       routePath = rmPath + "/" + file.replace(".ts", "");
-      //@ts-ignore
-      app[code.route.method](routePath, code.route.run);
+      const method: string = code.route.method
+      const handler:any = code.route.run
+      console.log(handler as Handler)
+      switch(method) {
+        case "GET":
+            app.get(routePath, handler as RequestHandler)
+            console.log(method)
+            return
+        case "POST":
+            app.post(routePath, handler as RequestHandler)
+            console.log(method)
+            return
+        case "PUT": 
+            app.put(routePath, handler as RequestHandler)
+            console.log(method)
+            return
+        case "DELETE":
+            app.delete(routePath, handler as RequestHandler)
+            console.log(method)
+            return
+        default:
+            console.log("Bad Method")
+            return
+
+      }
     }
   }
 

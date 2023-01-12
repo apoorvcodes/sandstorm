@@ -7,7 +7,7 @@ export interface middlewareInterface {
 
 export interface FileRouteInterface {
   method: string;
-  run: (req:Request, res:Response,  next: NextFunction) => void
+  run: (req:Request, res:Response) => void
 }
 
 export interface FileSystemMiddlewareInterface {
