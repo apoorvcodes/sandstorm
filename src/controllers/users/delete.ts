@@ -2,8 +2,7 @@ import { Request, Response } from 'express';
 import { User } from '../../schema/userSchema';
 import { userInterface } from 'src/interfaces/user';
 
-export async function userGet(req: Request, res: Response) {
-  
+export async function userDelete(req: Request, res: Response) {
   const isUser = await User.findOne({ id: req.params.id });
   if (!isUser) {
     res.status(400).json({
@@ -13,13 +12,13 @@ export async function userGet(req: Request, res: Response) {
     return;
   }
 
-  const newUser = new User(data);
-  newUser.save().then(() => console.log("user has been saved!"));
+  const ref = await User.findOneAndDelete({id: req.params.id})
   res.status(200).json(
     {
         status: 200,
-        data: newUser
+        message: `User ${req.params.id} has been deleted from the database`,
+        data: ref as userInterface
     }
   )
-  console.log(newUser)
+  console.log(ref)
 }
