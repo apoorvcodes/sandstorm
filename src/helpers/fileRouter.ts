@@ -6,15 +6,19 @@ import type { FileSystemMiddlewareInterface } from '../interfaces/handler';
 
 export class FileSystemRouter {
   private options: FileSystemMiddlewareInterface;
-  public mid: [{
-   name: string,
-   handler: RequestHandler,
-  }] 
-  public route:[{
-    method: string,
-    handler: RequestHandler
-    path: string
-  }] 
+  public mid: [
+    {
+      name: string;
+      handler: RequestHandler;
+    }
+  ];
+  public route: [
+    {
+      method: string;
+      handler: RequestHandler;
+      path: string;
+    }
+  ];
   constructor(options: FileSystemMiddlewareInterface) {
     this.options = options;
   }
@@ -31,10 +35,10 @@ export class FileSystemRouter {
 
     readdirSync(middlewarePath).forEach(async (file: string) => {
       const middleware = await import(`${middlewarePath}/${file}`);
-       this.mid.push({
+      this.mid.push({
         name: middleware.middleware.name as string,
         handler: middleware.middleware.run as RequestHandler
-       })
+      });
     });
   }
 
@@ -60,8 +64,7 @@ export class FileSystemRouter {
         method: code.route.method as string,
         handler: code.route.run as RequestHandler,
         path: routePath as string
-       })
-     
+      });
     }
   }
 

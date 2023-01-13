@@ -14,6 +14,6 @@ export const middleware: middlewareInterface = {
     );
 
     console.log(cristal('------------------------------\n'));
-    next()
+    next();
   }
 };

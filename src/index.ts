@@ -1,16 +1,17 @@
-import env from "dotenv"
+import env from 'dotenv';
 env.config();
 import express, { Express, Request, Response } from 'express';
 import { HOST, PORT, MONGOPASS } from './constants';
-import cors from "cors"
+import cors from 'cors';
 import { middleware } from './middlewares/logger';
 import { mongoConnect } from './helpers/mongoConnect';
-
+import { controllers } from './controllers/controllers';
 const app: Express = express();
 
-app.use(cors())
-app.use(middleware.run)
+app.use(cors());
+app.use(middleware.run);
 mongoConnect(MONGOPASS);
+app.use(controllers);
 app.get('/', (req: Request, res: Response) => {
   console.log(req.body);
   res.send('Hello');
