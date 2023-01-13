@@ -24,6 +24,7 @@
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "express-next-router": "^1.0.7",
+    "find-config": "^1.0.0",
     "gradient-string": "^2.0.2",
     "mongoose": "^6.8.3"
   }
