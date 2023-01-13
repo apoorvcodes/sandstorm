@@ -4,7 +4,7 @@ import { cristal } from 'gradient-string';
 export const middleware: middlewareInterface = {
   name: 'basicLogger',
   position: 'before',
-  run: (req: Request, _: Response, __: NextFunction): void => {
+  run: (req: Request, _: Response, next: NextFunction): void => {
     console.log(cristal('------------------------------'));
     const time = new Date().toISOString();
     console.log(
@@ -14,5 +14,6 @@ export const middleware: middlewareInterface = {
     );
 
     console.log(cristal('------------------------------\n'));
+    next()
   }
 };

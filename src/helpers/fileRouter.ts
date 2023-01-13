@@ -1,4 +1,4 @@
-import { Express, Handler, RequestHandler } from 'express';
+import { Express, RequestHandler } from 'express';
 import { readdirSync, lstatSync } from 'fs';
 import path from 'path';
 
@@ -6,7 +6,15 @@ import type { FileSystemMiddlewareInterface } from '../interfaces/handler';
 
 export class FileSystemRouter {
   private options: FileSystemMiddlewareInterface;
-
+  public mid: [{
+   name: string,
+   handler: RequestHandler,
+  }] 
+  public route:[{
+    method: string,
+    handler: RequestHandler
+    path: string
+  }] 
   constructor(options: FileSystemMiddlewareInterface) {
     this.options = options;
   }
@@ -15,7 +23,7 @@ export class FileSystemRouter {
     return {};
   }
 
-  public middlewares(app: Express): void {
+  public middlewares(_: Express): void {
     const middlewarePath: string = path.join(
       process.cwd(),
       this.options.middlewareDir
@@ -23,11 +31,14 @@ export class FileSystemRouter {
 
     readdirSync(middlewarePath).forEach(async (file: string) => {
       const middleware = await import(`${middlewarePath}/${file}`);
-      app.use(middleware.middleware.run);
+       this.mid.push({
+        name: middleware.middleware.name as string,
+        handler: middleware.middleware.run as RequestHandler
+       })
     });
   }
 
-  private async logFile(file: string, path: string, app: Express) {
+  private async logFile(file: string, path: string, _: Express) {
     if (file.endsWith('.js') || file.endsWith('.ts')) {
       const code = await import(`${path}/${file}`);
 
@@ -45,59 +56,41 @@ export class FileSystemRouter {
       let routePath: string = '';
 
       routePath = rmPath + '/' + file.replace('.ts', '');
-      const method: string = code.route.method;
-      const handler: any = code.route.run;
-      console.log(handler as Handler);
-      switch (method) {
-        case 'GET':
-          app.get(routePath, handler as RequestHandler);
-          console.log(method);
-          return;
-        case 'POST':
-          app.post(routePath, handler as RequestHandler);
-          console.log(method);
-          return;
-        case 'PUT':
-          app.put(routePath, handler as RequestHandler);
-          console.log(method);
-          return;
-        case 'DELETE':
-          app.delete(routePath, handler as RequestHandler);
-          console.log(method);
-          return;
-        default:
-          console.log('Bad Method');
-          return;
-      }
+      this.route.push({
+        method: code.route.method as string,
+        handler: code.route.run as RequestHandler,
+        path: routePath as string
+       })
+     
     }
   }
 
-  private logDirectory(file: string, app: Express) {
+  private logDirectory(file: string, _: Express) {
     readdirSync(file).forEach(async (dir: string) => {
       const dirFile = await lstatSync(`${file}/${dir}`);
 
       if (dirFile.isDirectory()) {
-        this.logDirectory(`${file}/${dir}`, app);
+        this.logDirectory(`${file}/${dir}`, _);
       }
 
       if (dirFile.isFile()) {
-        await this.logFile(dir, file, app);
+        await this.logFile(dir, file, _);
       }
     });
   }
 
-  public logRoutes(app: Express) {
+  public logRoutes(_: Express) {
     const routePath: string = path.join(process.cwd(), this.options.routerDir);
 
     readdirSync(routePath).forEach(async (dir: string) => {
       const file = await lstatSync(`${routePath}/${dir}`);
 
       if (file.isDirectory()) {
-        this.logDirectory(`${routePath}/${dir}`, app);
+        this.logDirectory(`${routePath}/${dir}`, _);
       }
 
       if (file.isFile()) {
-        await this.logFile(dir, routePath, app);
+        await this.logFile(dir, routePath, _);
       }
     });
   }
