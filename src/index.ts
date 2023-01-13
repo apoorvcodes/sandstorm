@@ -9,6 +9,7 @@ import { controllers } from './controllers/controllers';
 const app: Express = express();
 
 app.use(cors());
+app.use(express.json());
 app.use(middleware.run);
 mongoConnect(MONGOPASS);
 app.use(controllers);

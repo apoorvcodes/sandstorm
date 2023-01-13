@@ -3,6 +3,6 @@ import { Router } from 'express';
 
 const controllers: Router = Router();
 
-controllers.get('/users/create', userCreate);
+controllers.post('/users/create', userCreate);
 
 export { controllers };

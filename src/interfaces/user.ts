@@ -6,7 +6,7 @@ export interface userInterface {
   name: string;
   email: string;
   avatarUrl: string;
-  buidls: buildInterface[];
+  buidls?: buildInterface[];
 }
 
 export interface buildInterface {
