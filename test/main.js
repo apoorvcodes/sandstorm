@@ -38,14 +38,14 @@ const axios = require("axios")
 
 async function fetch(){
     const res = await axios({
-        method: 'POST',
-        url: 'http://localhost:3000/buidls/create/Fred',
+        method: 'DELETE',
+        url: 'http://localhost:3000/buidls/delete/12233svfrf',
         headers: {
           'Content-Type':'application/json',
         },
         data: JSON.stringify({
           id: '12233svfrf',
-          website: "https://github.com/apoorvcodes",
+          website: "https://github.com/gominima",
           github: "sfwef",
           email: "frg"
 

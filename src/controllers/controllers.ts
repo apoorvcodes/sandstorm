@@ -1,4 +1,4 @@
-import { buidlCreate, buidlUpdate } from './buidls';
+import { buidlCreate, buidlDelete, buidlRead, buidlUpdate } from './buidls';
 import { userCreate, userDelete, userRead, userUpdate } from './users';
 import { Router } from 'express';
 
@@ -11,5 +11,7 @@ controllers.delete('/users/delete/:id', userDelete);
 
 controllers.post('/buidls/create/:owner', buidlCreate);
 controllers.put('/buidls/update/:id', buidlUpdate);
+controllers.get("/buidls/read/:id", buidlRead);
+controllers.delete("/buidls/delete/:id", buidlDelete)
 
 export { controllers };

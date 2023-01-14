@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { Buidl } from '../../schema/buidlSchema';
 import { buidlInterface } from 'src/interfaces/buidl';
-import { User } from '../../schema/userSchema';
 
 export async function buidlUpdate(req: Request, res: Response) {
   const data: buidlInterface = {
@@ -9,7 +8,7 @@ export async function buidlUpdate(req: Request, res: Response) {
     createdAt: Date.now().toString(),
     updatedAt: Date.now().toString(),
     fundsPubkey: req.body.fundspubkey,
-    website: req.body.websiteste,
+    website: req.body.website,
     twitter: req.body.twitter,
     linkdin: req.body.linkdin,
     github: req.body.github,
@@ -26,22 +25,6 @@ export async function buidlUpdate(req: Request, res: Response) {
     res.status(400).json({
       status: 400,
       err: 'no buidl with the specific id found in database',
-      data: {
-        id: buidl.id,
-        createdAt: buidl.createdAt,
-        updatedAt: buidl.updatedAt,
-        fundsPubkey: buidl.fubdspubkey,
-        website: buidl.webiste,
-        twitter: buidl.twitter,
-        linkdin: buidl.linkdin,
-        github: buidl.github,
-        email: buidl.email,
-        avatarUrl: buidl.avatarurl,
-        bannerUrl: buidl.bannerurl,
-        goals: buidl.goals,
-        members: buidl.members,
-        transactions: buidl.transactions
-      }
     });
     return;
   }
