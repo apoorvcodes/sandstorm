@@ -5,7 +5,7 @@ import { userInterface } from 'src/interfaces/user';
 export async function userUpdate(req: Request, res: Response) {
   const data: userInterface = {
     id: req.params.id,
-    createdAt: "N0T_TO_BE_UPDATED",
+    createdAt: 'N0T_TO_BE_UPDATED',
     updatedAt: Date.now().toString(),
     pubkey: req.body.pubkey,
     name: req.body.name,
@@ -17,7 +17,7 @@ export async function userUpdate(req: Request, res: Response) {
   if (!isUser) {
     res.status(400).json({
       status: 400,
-      err: 'no user with the specific id found in database',
+      err: 'no user with the specific id found in database'
     });
     return;
   }
@@ -28,13 +28,11 @@ export async function userUpdate(req: Request, res: Response) {
   isUser.avatarUrl = data.avatarUrl || isUser.avatarUrl;
   isUser.buidls = data.buidls || isUser.buidls;
 
-  isUser.save().then(() => console.log("User has been updated"))
-  
-  res.status(200).json(
-    {
-        status: 200,
-        data: isUser as userInterface,
-    }
-  )
-  console.log(isUser)
+  isUser.save().then(() => console.log('User has been updated'));
+
+  res.status(200).json({
+    status: 200,
+    data: isUser as userInterface
+  });
+  console.log(isUser);
 }

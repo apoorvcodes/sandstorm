@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import {Buidl, } from "../../schema/buidlSchema"
+import { Buidl } from '../../schema/buidlSchema';
 import { buidlInterface } from 'src/interfaces/buidl';
 import { User } from '../../schema/userSchema';
 
@@ -18,11 +18,11 @@ export async function buidlCreate(req: Request, res: Response) {
     bannerUrl: req.body.bannerurl,
     goals: [],
     members: [
-        {
-            index: 1,
-            userID: req.params.owner,
-            joinedAt: Date.now().toString(),
-        }
+      {
+        index: 1,
+        userID: req.params.owner,
+        joinedAt: Date.now().toString()
+      }
     ],
     transactions: []
   };
@@ -53,22 +53,25 @@ export async function buidlCreate(req: Request, res: Response) {
   }
 
   const buidl = new Buidl(data);
-  const user = await User.findOne({id: req.params.owner })
-  if(!user) { res.status(400).json({ err : "No specific user with ID found, buidl no created"}); return; }
+  const user = await User.findOne({ id: req.params.owner });
+  if (!user) {
+    res
+      .status(400)
+      .json({ err: 'No specific user with ID found, buidl no created' });
+    return;
+  }
   user.buidls.push({
     id: user.buidls.length + 1,
     organisationId: data.id,
-    joinedAt: Date.now().toString(),
-  })
-  
-  buidl.save().then(() => console.log("buidl has been saved!"));
-  user.save().then(() => console.log("buidl saved to user cache"));
+    joinedAt: Date.now().toString()
+  });
 
-  res.status(200).json(
-    {
-        status: 200,
-        data: buidl
-    }
-  )
-  console.log(buidl)
+  buidl.save().then(() => console.log('buidl has been saved!'));
+  user.save().then(() => console.log('buidl saved to user cache'));
+
+  res.status(200).json({
+    status: 200,
+    data: buidl
+  });
+  console.log(buidl);
 }

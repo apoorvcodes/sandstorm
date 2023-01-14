@@ -7,16 +7,14 @@ export async function userRead(req: Request, res: Response) {
   if (!isUser) {
     res.status(400).json({
       status: 400,
-      err: 'no user with the specific id found in database',
+      err: 'no user with the specific id found in database'
     });
     return;
   }
 
-  res.status(200).json(
-    {
-        status: 200,
-        data: isUser as userInterface,
-    }
-  )
-  console.log(isUser)
+  res.status(200).json({
+    status: 200,
+    data: isUser as userInterface
+  });
+  console.log(isUser);
 }

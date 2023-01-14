@@ -33,12 +33,10 @@ export async function userCreate(req: Request, res: Response) {
   }
 
   const newUser = new User(data);
-  newUser.save().then(() => console.log("user has been saved!"));
-  res.status(200).json(
-    {
-        status: 200,
-        data: newUser
-    }
-  )
-  console.log(newUser)
+  newUser.save().then(() => console.log('user has been saved!'));
+  res.status(200).json({
+    status: 200,
+    data: newUser
+  });
+  console.log(newUser);
 }
