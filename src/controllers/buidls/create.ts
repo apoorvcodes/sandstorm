@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import {Buidl, } from "../../schema/buidlSchema"
 import { buidlInterface } from 'src/interfaces/buidl';
-import { User } from 'src/schema/userSchema';
+import { User } from '../../schema/userSchema';
 
 export async function buidlCreate(req: Request, res: Response) {
   const data: buidlInterface = {
@@ -20,7 +20,7 @@ export async function buidlCreate(req: Request, res: Response) {
     members: [
         {
             index: 1,
-            userID: req.params.id,
+            userID: req.params.owner,
             joinedAt: Date.now().toString(),
         }
     ],
@@ -53,9 +53,10 @@ export async function buidlCreate(req: Request, res: Response) {
   }
 
   const buidl = new Buidl(data);
-  const user = await User.findOne({id: req.params.id })
+  const user = await User.findOne({id: req.params.owner })
+  if(!user) { res.status(400).json({ err : "No specific user with ID found, buidl no created"}); return; }
   user.buidls.push({
-    id: user.buidls.lenght + 1,
+    id: user.buidls.length + 1,
     organisationId: data.id,
     joinedAt: Date.now().toString(),
   })

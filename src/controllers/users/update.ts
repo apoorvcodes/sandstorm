@@ -6,7 +6,7 @@ export async function userUpdate(req: Request, res: Response) {
   const data: userInterface = {
     id: req.params.id,
     createdAt: "N0T_TO_BE_UPDATED",
-    updatedAt: "N0T_TO_BE_UPDATED",
+    updatedAt: Date.now().toString(),
     pubkey: req.body.pubkey,
     name: req.body.name,
     email: req.body.email,

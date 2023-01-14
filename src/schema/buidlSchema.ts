@@ -25,7 +25,7 @@ export const buidlSchema = new mongoose.Schema({
   ],
   members: [
     {
-      id: String,
+      index: String,
       userID: String,
       joinedAt: String
     }
