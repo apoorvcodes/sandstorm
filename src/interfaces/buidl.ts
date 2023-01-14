@@ -27,7 +27,7 @@ interface goalInterface {
 }
 
 interface memberInterface {
-  id: string;
+  index: number;
   userID: string;
   joinedAt: string;
 }

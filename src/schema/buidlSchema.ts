@@ -45,4 +45,4 @@ export const buidlSchema = new mongoose.Schema({
   ]
 });
 
-export const User: any = mongoose.model<buidlInterface>('buidls', buidlSchema);
+export const Buidl: any = mongoose.model<buidlInterface>('buidls', buidlSchema);
