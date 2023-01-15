@@ -24,7 +24,7 @@ export async function buidlCreate(req: Request, res: Response) {
         joinedAt: Date.now().toString()
       }
     ],
-    transactions: []
+    transactions: req.body.transactions || []
   };
 
   const isBuidl = await Buidl.findOne({ id: data.id });

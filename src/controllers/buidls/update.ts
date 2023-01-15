@@ -17,7 +17,7 @@ export async function buidlUpdate(req: Request, res: Response) {
     bannerUrl: req.body.bannerurl,
     goals: req.body.goals,
     members: req.body.members,
-    transactions: []
+    transactions: req.body.transactions
   };
 
   const buidl = await Buidl.findOne({ id: data.id });
@@ -30,6 +30,7 @@ export async function buidlUpdate(req: Request, res: Response) {
   }
 
   buidl.updatedAt = Date.now().toString();
+  buidl.transactions = data.transactions
   buidl.fundsPubkey = data.fundsPubkey || buidl.fundsPubkey;
   buidl.website = data.website || buidl.webiste;
   buidl.twitter = data.twitter || buidl.twitter;
