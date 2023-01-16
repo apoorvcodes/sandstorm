@@ -72,6 +72,6 @@ export async function buidlCreate(req: Request, res: Response) {
   res.status(200).json({
     status: 200,
     data: buidl
-  });
+  })
   console.log(buidl);
 }
