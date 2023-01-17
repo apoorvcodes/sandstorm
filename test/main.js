@@ -58,16 +58,22 @@ const axios = require("axios")
 // fetch()
 
 
-// async function fetch(){
-//         const res = await axios({
-//             method: 'GET',
-//             url: 'http://localhost:3000/mint//',
-//             headers: {
-//               'Content-Type':'application/json',
-//             },
-//           });
+async function fetch(){
+        const res = await axios({
+            method: 'GET',
+            url: 'http://localhost:3000/mint/Plutera/0xapoo',
+            headers: {
+              'Content-Type':'application/json',
+            },
+            data: {
+              id: "Plutera",
+              website: "https://plutera.app",
+              email: "help@plutera.app"
+      
+            }
+          });
     
-//         console.log(res)
-//     }
+        console.log(res)
+    }
     
-//  fetch()
+ fetch()
