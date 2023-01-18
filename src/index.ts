@@ -18,7 +18,7 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Hello');
 });
 
-app.listen(Number(process.env.$PORT), HOST, () => {
+app.listen(Number(process.env.PORT), HOST, () => {
   console.log('Server up and running;');
-  console.log(process.env.$PORT)
+  console.log(process.env.PORT)
 });
