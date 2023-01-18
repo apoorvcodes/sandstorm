@@ -31,7 +31,7 @@ export async function mintNft(req: Request, res: Response) {
 
   const userData = await User.findOne({ id: user });
 
-  const respo = await mintNftHelper(0, userData.pubkey);
+  const respo = await mintNftHelper(stage, userData.pubkey);
   await sleep(10000);
   const status = await checkStatus(respo.id)
   console.log(status)
