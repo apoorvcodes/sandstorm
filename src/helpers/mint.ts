@@ -3,7 +3,7 @@ import { Images } from '../enums/image';
 import { TOKEN, PROJECTID } from '.././constants';
 export async function mintNftHelper(
   stage: number,
-  email: string
+  address: string
 ): Promise<any> {
   let img = Images.zero;
 
@@ -36,7 +36,7 @@ export async function mintNftHelper(
       'Content-Type': 'application/json'
     },
     data: {
-      recipient: `email:${email}:solana`,
+      recipient: `solana:${address}`,
       metadata: {
         name: `Stage ${stage} nft`,
         image: img,
@@ -62,3 +62,4 @@ export async function checkStatus(id: string): Promise<any> {
   console.log(res);
   return res.data;
 }
+

@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { Buidl } from '../../schema/buidlSchema';
 
 import { User } from '../../schema/userSchema';
-import { mintNftHelper } from '../../helpers/mint';
+import { checkStatus, mintNftHelper } from '../../helpers/mint';
 export async function mintNft(req: Request, res: Response) {
   const buidl = req.params.org;
   const user = req.params.user;
@@ -30,18 +30,29 @@ export async function mintNft(req: Request, res: Response) {
 
   const userData = await User.findOne({ id: user });
 
-  const respo = await mintNftHelper(4, userData.email);
+  const respo = await mintNftHelper(0, userData.pubkey);
+  await sleep(10000);
+  const status = await checkStatus(respo.id)
+  console.log(status)
   userData.nfts.push({
     id: respo.id,
     buidlid: data.id,
     mintedAt: Date.now().toString(),
-    updatedAt: Date.now().toString()
+    updatedAt: Date.now().toString(),
+    minthash: status.onChain.mintHash,
+    owner: status.onChain.owner,
+    url: status.metadata.image
   });
 
   userData.save().then(() => {
     res.status(200).json({
       msg: 'Mint was successful',
-      data: respo
+      data: status
     });
   });
+}
+
+
+function sleep(ms:any) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
