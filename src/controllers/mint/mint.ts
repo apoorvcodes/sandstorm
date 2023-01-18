@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { Buidl } from '../../schema/buidlSchema';
-// import { User } from '../../schema/userSchema';
+
+import { User } from '../../schema/userSchema';
+import { mintNftHelper } from '../../helpers/mint';
 export async function mintNft(req: Request, res: Response) {
   const buidl = req.params.org;
   const user = req.params.user;
@@ -10,11 +12,36 @@ export async function mintNft(req: Request, res: Response) {
     return;
   }
 
-  res.json(user);
   console.log(data.members);
-  console.log(
-    data.members.find((e: any) => {
+
+  if (
+    !data.members.find((e: any) => {
       return e.userID == user;
-    }).name
-  );
+    }).userID
+  ) {
+    console.log(
+      data.members.find((e: any) => {
+        return e.userID == user;
+      })
+    );
+    res.status(400).json({ err: 'No user found in the buidl project' });
+    return;
+  }
+
+  const userData = await User.findOne({ id: user });
+
+  const respo = await mintNftHelper(4, userData.email);
+  userData.nfts.push({
+    id: respo.id,
+    buidlid: data.id,
+    mintedAt: Date.now().toString(),
+    updatedAt: Date.now().toString()
+  });
+
+  userData.save().then(() => {
+    res.status(200).json({
+      msg: 'Mint was successful',
+      data: respo
+    });
+  });
 }

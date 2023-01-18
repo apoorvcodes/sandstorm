@@ -16,11 +16,12 @@ export interface buildInterface {
   joinedAt: string;
 }
 
-
 export interface nftInterface {
-  id: string,
-  createdAt: string;
-  mintedAt: string,
-  url: string
-
+  id: string;
+  updatedAt: string;
+  mintedAt: string;
+  url: string;
+  minthash: string;
+  owner: string;
+  buidlid: string;
 }

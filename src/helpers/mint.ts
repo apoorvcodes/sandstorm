@@ -1,19 +1,64 @@
 import axios from 'axios';
-async function mintNft(
+import { Images } from '../enums/image';
+import { TOKEN, PROJECTID } from '.././constants';
+export async function mintNftHelper(
   stage: number,
-  address: string,
   email: string
-): Promise<void> {
+): Promise<any> {
+  let img = Images.zero;
+
+  switch (stage) {
+    case 0:
+      img = Images.zero;
+      break;
+    case 1:
+      img = Images.one;
+      break;
+    case 2:
+      img = Images.two;
+      break;
+    case 3:
+      img = Images.three;
+      break;
+    case 4:
+      img = Images.four;
+      break;
+    default:
+      break;
+  }
+
   const res = await axios({
     method: 'POST',
-    url: 'http://localhost:3000/mint/Plutera/0xapoo',
+    url: 'https://staging.crossmint.com/api/2022-06-09/collections/default-solana/nfts',
     headers: {
+      'x-project-id': PROJECTID,
+      'x-client-secret': TOKEN,
       'Content-Type': 'application/json'
     },
     data: {
-      id: 'Plutera',
-      website: 'https://plutera.app',
-      email: 'help@plutera.app'
+      recipient: `email:${email}:solana`,
+      metadata: {
+        name: `Stage ${stage} nft`,
+        image: img,
+        description: 'Minting nft'
+      }
     }
   });
+  return res.data;
+}
+
+export async function checkStatus(id: string): Promise<any> {
+  console.log(id);
+
+  const res = await axios({
+    method: 'GET',
+    url: `https://staging.crossmint.com/api/2022-06-09/collections/default-solana/nfts/${id}`,
+    headers: {
+      'x-project-id': PROJECTID,
+      'x-client-secret': TOKEN,
+      'Content-Type': 'application/json'
+    }
+  });
+  console.log(res);
+  return res.data;
 }
