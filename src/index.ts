@@ -20,4 +20,5 @@ app.get('/', (req: Request, res: Response) => {
 
 app.listen(Number(process.env.$PORT), HOST, () => {
   console.log('Server up and running;');
+  console.log(process.env.$PORT)
 });
