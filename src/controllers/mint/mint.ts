@@ -6,6 +6,7 @@ import { checkStatus, mintNftHelper } from '../../helpers/mint';
 export async function mintNft(req: Request, res: Response) {
   const buidl = req.params.org;
   const user = req.params.user;
+  const stage = Number(req.params.stage)
   const data = await Buidl.findOne({ id: buidl });
   if (!data) {
     res.status(400).json({ err: 'There is no buidl found with this id' });
