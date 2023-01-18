@@ -24,13 +24,13 @@ export async function buidlUpdate(req: Request, res: Response) {
   if (!buidl) {
     res.status(400).json({
       status: 400,
-      err: 'no buidl with the specific id found in database',
+      err: 'no buidl with the specific id found in database'
     });
     return;
   }
 
   buidl.updatedAt = Date.now().toString();
-  buidl.transactions = data.transactions
+  buidl.transactions = data.transactions;
   buidl.fundsPubkey = data.fundsPubkey || buidl.fundsPubkey;
   buidl.website = data.website || buidl.webiste;
   buidl.twitter = data.twitter || buidl.twitter;

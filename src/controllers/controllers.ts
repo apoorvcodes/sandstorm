@@ -12,8 +12,8 @@ controllers.delete('/users/delete/:id', userDelete);
 
 controllers.post('/buidls/create/:owner', buidlCreate);
 controllers.put('/buidls/update/:id', buidlUpdate);
-controllers.get("/buidls/read/:id", buidlRead);
-controllers.delete("/buidls/delete/:id", buidlDelete)
+controllers.get('/buidls/read/:id', buidlRead);
+controllers.delete('/buidls/delete/:id', buidlDelete);
 
-controllers.get("/mint/:org/:user", mintNft)
+controllers.get('/mint/:org/:user', mintNft);
 export { controllers };

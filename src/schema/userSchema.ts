@@ -15,7 +15,13 @@ export const userSchema = new mongoose.Schema({
       organisationId: String,
       joinedAt: String
     }
-  ]
+  ],
+  nfts: [{
+    id: String,
+    url: String,
+    mintedAt: String,
+    buidlid: String,
+  }]
 });
 
 export const User: any = mongoose.model<userInterface>('user', userSchema);

@@ -7,10 +7,20 @@ export interface userInterface {
   email: string;
   avatarUrl: string;
   buidls?: buildInterface[];
+  nfts?: nftInterface[];
 }
 
 export interface buildInterface {
   id: string;
   organisationId: string;
   joinedAt: string;
+}
+
+
+export interface nftInterface {
+  id: string,
+  createdAt: string;
+  mintedAt: string,
+  url: string
+
 }
