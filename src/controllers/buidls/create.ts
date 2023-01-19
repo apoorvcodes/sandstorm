@@ -5,10 +5,10 @@ import { User } from '../../schema/userSchema';
 
 export async function buidlCreate(req: Request, res: Response) {
   const data: buidlInterface = {
-    id: req.body.id,
+    _id: req.body.id,
     createdAt: Date.now().toString(),
     updatedAt: Date.now().toString(),
-    fundsPubkey: req.body.fubdspubkey,
+    address: req.body.address,
     website: req.body.webiste,
     twitter: req.body.twitter,
     linkdin: req.body.linkdin,
@@ -27,7 +27,7 @@ export async function buidlCreate(req: Request, res: Response) {
     transactions: req.body.transactions || []
   };
 
-  const isBuidl = await Buidl.findOne({ id: data.id });
+  const isBuidl = await Buidl.findOne({ _id: data._id });
   if (isBuidl) {
     res.status(400).json({
       status: 400,
@@ -62,7 +62,7 @@ export async function buidlCreate(req: Request, res: Response) {
   }
   user.buidls.push({
     id: user.buidls.length + 1,
-    organisationId: data.id,
+    organisationId: data._id,
     joinedAt: Date.now().toString()
   });
 

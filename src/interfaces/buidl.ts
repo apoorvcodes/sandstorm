@@ -1,10 +1,10 @@
 import { transactionInterface } from './transaction';
 
 export interface buidlInterface {
-  id: string;
+  _id: string;
   createdAt: string;
   updatedAt: string;
-  fundsPubkey: string;
+  address: string;
   website: string;
   twitter: string;
   linkdin: string;
@@ -18,7 +18,7 @@ export interface buidlInterface {
 }
 
 interface goalInterface {
-  id: string;
+  _id: string;
   title: string;
   status: boolean;
   createdAt: string;

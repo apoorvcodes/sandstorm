@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 import { userInterface } from '../interfaces/user';
 
 export const userSchema = new mongoose.Schema({
-  id: String,
   createdAt: String,
   updatedAt: String,
   pubkey: String,

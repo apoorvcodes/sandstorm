@@ -3,11 +3,9 @@ import { Buidl } from '../../schema/buidlSchema';
 import { buidlInterface } from 'src/interfaces/buidl';
 
 export async function buidlUpdate(req: Request, res: Response) {
-  const data: buidlInterface = {
-    id: req.params.id,
-    createdAt: Date.now().toString(),
+  const data: Partial<buidlInterface> = {
+    _id: req.params.id,
     updatedAt: Date.now().toString(),
-    fundsPubkey: req.body.fundspubkey,
     website: req.body.website,
     twitter: req.body.twitter,
     linkdin: req.body.linkdin,
@@ -20,7 +18,7 @@ export async function buidlUpdate(req: Request, res: Response) {
     transactions: req.body.transactions
   };
 
-  const buidl = await Buidl.findOne({ id: data.id });
+  const buidl = await Buidl.findOne({ _id: data._id });
   if (!buidl) {
     res.status(400).json({
       status: 400,
@@ -31,7 +29,6 @@ export async function buidlUpdate(req: Request, res: Response) {
 
   buidl.updatedAt = Date.now().toString();
   buidl.transactions = data.transactions;
-  buidl.fundsPubkey = data.fundsPubkey || buidl.fundsPubkey;
   buidl.website = data.website || buidl.webiste;
   buidl.twitter = data.twitter || buidl.twitter;
   buidl.linkdin = data.linkdin || buidl.linkdin;

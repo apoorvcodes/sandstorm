@@ -5,7 +5,7 @@ export interface transactionInterface {
   tokenPubKey: string;
   reference: string;
   signature: string;
-  customerPubKey: string;
   message: string;
   status: string;
+  buidlId: string;
 }

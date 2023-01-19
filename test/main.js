@@ -1,8 +1,4 @@
-const axios = require("axios")
-
-
-
-
+const axios = require('axios');
 
 // async function fetch(){
 //         const res = await axios({
@@ -12,13 +8,11 @@ const axios = require("axios")
 //               'Content-Type':'application/json',
 //             },
 //           });
-    
+
 //         console.log(res)
 //     }
-    
+
 //  fetch()
-
-
 
 // async function fetch(){
 //     const res = await axios({
@@ -33,8 +27,6 @@ const axios = require("axios")
 // }
 
 // fetch()
-
-
 
 // async function fetch(){
 //     const res = await axios({
@@ -57,23 +49,36 @@ const axios = require("axios")
 
 // fetch()
 
+// async function fetch(){
+//         const res = await axios({
+//             method: 'GET',
+//             url: 'http://localhost:3000/mint/Plutera/0xapoo',
+//             headers: {
+//               'Content-Type':'application/json',
+//             },
+//             data: {
+//               id: "Plutera",
+//               website: "https://plutera.app",
+//               email: "help@plutera.app"
 
-async function fetch(){
-        const res = await axios({
-            method: 'GET',
-            url: 'http://localhost:3000/mint/Plutera/0xapoo',
-            headers: {
-              'Content-Type':'application/json',
-            },
-            data: {
-              id: "Plutera",
-              website: "https://plutera.app",
-              email: "help@plutera.app"
-      
-            }
-          });
-    
-        console.log(res)
+//             }
+//           });
+
+//         console.log(res)
+//     }
+
+async function fetch() {
+  const res = await axios({
+    method: 'POST',
+    url: 'http://localhost:3000/users/create',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: {
+      _id: 'test',
+      name: 'test'
     }
-    
- fetch()
+  });
+}
+
+fetch();
