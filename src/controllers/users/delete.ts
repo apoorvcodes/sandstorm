@@ -3,7 +3,7 @@ import { User } from '../../schema/userSchema';
 import { userInterface } from 'src/interfaces/user';
 
 export async function userDelete(req: Request, res: Response) {
-  const isUser = await User.findOne({ id: req.params.id });
+  const isUser = await User.findOne({ _id: req.params.id });
   if (!isUser) {
     res.status(400).json({
       status: 400,
@@ -12,7 +12,7 @@ export async function userDelete(req: Request, res: Response) {
     return;
   }
 
-  const ref = await User.findOneAndDelete({ id: req.params.id });
+  const ref = await User.findOneAndDelete({ _id: req.params.id });
   res.status(200).json({
     status: 200,
     message: `User ${req.params.id} has been deleted from the database`,

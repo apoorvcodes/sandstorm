@@ -3,7 +3,7 @@ import { User } from '../../schema/userSchema';
 import { userInterface } from 'src/interfaces/user';
 
 export async function userRead(req: Request, res: Response) {
-  const isUser = await User.findOne({ id: req.params.id });
+  const isUser = await User.findOne({ _id: req.params.id });
   if (!isUser) {
     res.status(400).json({
       status: 400,

@@ -2,10 +2,9 @@ import mongoose from 'mongoose';
 import { buidlInterface } from 'src/interfaces/buidl';
 
 export const buidlSchema = new mongoose.Schema({
-  id: String,
   createdAt: String,
   updatedAt: String,
-  fundsPubkey: String,
+  adress: String,
   website: String,
   twitter: String,
   linkdin: String,
@@ -15,7 +14,6 @@ export const buidlSchema = new mongoose.Schema({
   bannerUrl: String,
   goals: [
     {
-      id: String,
       title: String,
       status: Boolean,
       createdAt: String,

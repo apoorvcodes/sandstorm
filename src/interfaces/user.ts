@@ -1,8 +1,8 @@
 export interface userInterface {
-  id: string;
   createdAt: string;
   updatedAt: string;
   pubkey: string;
+  address:string;
   name: string;
   email: string;
   avatarUrl: string;

@@ -4,10 +4,10 @@ import { buidlInterface } from 'src/interfaces/buidl';
 
 export async function buidlUpdate(req: Request, res: Response) {
   const data: Partial<buidlInterface> = {
-    _id: req.params.id,
     updatedAt: Date.now().toString(),
     website: req.body.website,
     twitter: req.body.twitter,
+    address: req.body.address,
     linkdin: req.body.linkdin,
     github: req.body.github,
     email: req.body.email,
@@ -18,7 +18,7 @@ export async function buidlUpdate(req: Request, res: Response) {
     transactions: req.body.transactions
   };
 
-  const buidl = await Buidl.findOne({ _id: data._id });
+  const buidl = await Buidl.findOne({ address: data.address });
   if (!buidl) {
     res.status(400).json({
       status: 400,
@@ -30,6 +30,7 @@ export async function buidlUpdate(req: Request, res: Response) {
   buidl.updatedAt = Date.now().toString();
   buidl.transactions = data.transactions;
   buidl.website = data.website || buidl.webiste;
+  buidl.address = data.address || buidl.address;
   buidl.twitter = data.twitter || buidl.twitter;
   buidl.linkdin = data.linkdin || buidl.linkdin;
   buidl.github = data.github || buidl.github;

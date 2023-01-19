@@ -7,7 +7,7 @@ export async function mintNft(req: Request, res: Response) {
   const buidl = req.params.org;
   const user = req.params.user;
   const stage = Number(req.params.stage)
-  const data = await Buidl.findOne({ id: buidl });
+  const data = await Buidl.findOne({ _id: buidl });
   if (!data) {
     res.status(400).json({ err: 'There is no buidl found with this id' });
     return;
@@ -29,7 +29,7 @@ export async function mintNft(req: Request, res: Response) {
     return;
   }
 
-  const userData = await User.findOne({ id: user });
+  const userData = await User.findOne({ _id: user });
 
   const respo = await mintNftHelper(stage, userData.pubkey);
   await sleep(10000);

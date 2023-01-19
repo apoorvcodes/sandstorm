@@ -5,7 +5,6 @@ import { User } from '../../schema/userSchema';
 
 export async function buidlCreate(req: Request, res: Response) {
   const data: buidlInterface = {
-    _id: req.body.id,
     createdAt: Date.now().toString(),
     updatedAt: Date.now().toString(),
     address: req.body.address,
@@ -27,16 +26,15 @@ export async function buidlCreate(req: Request, res: Response) {
     transactions: req.body.transactions || []
   };
 
-  const isBuidl = await Buidl.findOne({ _id: data._id });
+  const isBuidl = await Buidl.findOne({ address: data.address });
   if (isBuidl) {
     res.status(400).json({
       status: 400,
       err: 'Buidl has already been registered and is duplicate',
       data: {
-        id: isBuidl.id,
         createdAt: isBuidl.createdAt,
         updatedAt: isBuidl.updatedAt,
-        fundsPubkey: isBuidl.fubdspubkey,
+        address: isBuidl.address,
         website: isBuidl.webiste,
         twitter: isBuidl.twitter,
         linkdin: isBuidl.linkdin,
@@ -62,7 +60,7 @@ export async function buidlCreate(req: Request, res: Response) {
   }
   user.buidls.push({
     id: user.buidls.length + 1,
-    organisationId: data._id,
+    organisationId: buidl._id,
     joinedAt: Date.now().toString()
   });
 

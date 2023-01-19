@@ -4,16 +4,16 @@ import { userInterface } from 'src/interfaces/user';
 
 export async function userUpdate(req: Request, res: Response) {
   const data: userInterface = {
-    id: req.params.id,
     createdAt: 'N0T_TO_BE_UPDATED',
     updatedAt: Date.now().toString(),
     pubkey: req.body.pubkey,
     name: req.body.name,
+    address: req.body.address,
     email: req.body.email,
     avatarUrl: req.body.avatarUrl,
     buidls: req.body.buidls
   };
-  const isUser = await User.findOne({ id: data.id });
+  const isUser = await User.findOne({ address: data.address });
   if (!isUser) {
     res.status(400).json({
       status: 400,
@@ -27,6 +27,7 @@ export async function userUpdate(req: Request, res: Response) {
   isUser.email = data.email || isUser.email;
   isUser.avatarUrl = data.avatarUrl || isUser.avatarUrl;
   isUser.buidls = data.buidls || isUser.buidls;
+  
 
   isUser.save().then(() => console.log('User has been updated'));
 

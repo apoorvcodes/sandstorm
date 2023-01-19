@@ -4,25 +4,26 @@ import { userInterface } from 'src/interfaces/user';
 
 export async function userCreate(req: Request, res: Response) {
   const data: userInterface = {
-    id: req.body.id,
     createdAt: Date.now().toString(),
     updatedAt: Date.now().toString(),
+    address: req.body.address,
     pubkey: req.body.pubkey,
     name: req.body.name,
     email: req.body.email,
     avatarUrl: req.body.avatarUrl,
     buidls: []
   };
-  const isUser = await User.findOne({ id: data.id });
+  const isUser = await User.findOne({ address: data.address });
   if (isUser) {
     res.status(400).json({
       status: 400,
       err: 'User has already been registered and is duplicate',
       data: {
-        id: isUser.id,
+        id: isUser._id,
         createdAt: isUser.createdAt,
         updatedAt: isUser.updatedAt,
         pubkey: isUser.pubkey,
+        address: isUser.address,
         name: isUser.name,
         email: isUser.email,
         avatarUrl: isUser.avatarUrl,
