@@ -6,7 +6,7 @@ import { checkStatus, mintNftHelper } from '../../helpers/mint';
 export async function mintNft(req: Request, res: Response) {
   const buidl = req.params.org;
   const user = req.params.user;
-  const stage = Number(req.params.stage)
+  const stage = Number(req.params.stage);
   const data = await Buidl.findOne({ _id: buidl });
   if (!data) {
     res.status(400).json({ err: 'There is no buidl found with this id' });
@@ -31,10 +31,20 @@ export async function mintNft(req: Request, res: Response) {
 
   const userData = await User.findOne({ _id: user });
 
+  if (!userData) {
+    res.status(400).json({ err: 'No user found with this id' });
+    return;
+  }
+
   const respo = await mintNftHelper(stage, userData.pubkey);
   await sleep(10000);
-  const status = await checkStatus(respo.id)
-  console.log(status)
+  const status = await checkStatus(respo.id);
+  console.log(status);
+
+  if (!userData.nfts) {
+    userData.nfts = [];
+  }
+
   userData.nfts.push({
     id: respo.id,
     buidlid: data.id,
@@ -53,7 +63,6 @@ export async function mintNft(req: Request, res: Response) {
   });
 }
 
-
-function sleep(ms:any) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+function sleep(ms: any) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }

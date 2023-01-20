@@ -70,7 +70,7 @@ const axios = require('axios');
 async function fetch() {
   const res = await axios({
     method: 'POST',
-    url: 'http://localhost:3000/users/create',
+    url: 'http://localhost:4000/users/create',
     headers: {
       'Content-Type': 'application/json'
     },

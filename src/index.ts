@@ -8,6 +8,8 @@ import { mongoConnect } from './helpers/mongoConnect';
 import { controllers } from './controllers/controllers';
 const app: Express = express();
 
+const port = process.env.PORT || '8080';
+
 app.use(cors());
 app.use(express.json());
 app.use(middleware.run);
@@ -18,7 +20,7 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Hello');
 });
 
-app.listen(Number(process.env.PORT), HOST, () => {
+app.listen(Number(port), HOST, () => {
   console.log('Server up and running;');
-  console.log(process.env.PORT)
+  console.log(process.env.PORT);
 });

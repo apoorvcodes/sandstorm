@@ -58,8 +58,13 @@ export async function buidlCreate(req: Request, res: Response) {
       .json({ err: 'No specific user with ID found, buidl no created' });
     return;
   }
+
+  if (!user.buidls) {
+    user.buidls = [];
+  }
+
   user.buidls.push({
-    id: user.buidls.length + 1,
+    id: buidl._id,
     organisationId: buidl._id,
     joinedAt: Date.now().toString()
   });
@@ -71,5 +76,4 @@ export async function buidlCreate(req: Request, res: Response) {
     status: 200,
     data: buidl
   });
-  console.log(buidl);
 }
