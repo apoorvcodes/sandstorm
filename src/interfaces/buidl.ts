@@ -1,5 +1,5 @@
 import { transactionInterface } from './transaction';
-import { token } from 'src/enums/token';
+import { token } from '.././enums/token';
 export interface buidlInterface {
   createdAt: string;
   updatedAt: string;

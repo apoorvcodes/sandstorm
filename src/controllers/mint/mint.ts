@@ -16,9 +16,10 @@ export async function mintNft(req: Request, res: Response) {
   console.log(data.members);
 
   if (
+    //@ts-ignore
     !data.members.find((e: any) => {
       return e.userID == user;
-    }).userID
+    }).userID 
   ) {
     console.log(
       data.members.find((e: any) => {

@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import { token } from 'src/enums/token';
 import { buidlInterface } from 'src/interfaces/buidl';
 
 export const buidlSchema = new mongoose.Schema({
@@ -15,7 +14,7 @@ export const buidlSchema = new mongoose.Schema({
   bannerUrl: String,
   amountRequested: String,
   amountGranted: String,
-  token: token,
+  token: String,
   updatesCount: Number,
   goals: [
     {
