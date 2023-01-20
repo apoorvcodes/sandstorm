@@ -11,10 +11,10 @@ export interface buidlInterface {
   email: string;
   avatarUrl: string;
   bannerUrl: string;
-  amountRequested: string,
-  amountGranted: string,
-  token: token,
-  updatesCount: number,
+  amountRequested: string;
+  amountGranted: string;
+  token: token;
+  updatesCount: number;
   goals: goalInterface[];
   members: memberInterface[];
   transactions: transactionInterface[];

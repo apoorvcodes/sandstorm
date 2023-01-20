@@ -13,6 +13,10 @@ export async function buidlCreate(req: Request, res: Response) {
     linkdin: req.body.linkdin,
     github: req.body.github,
     email: req.body.email,
+    amountRequested: req.body.amountrequested,
+    amountGranted: req.body.amountgranted,
+    token: req.body.token,
+    updatesCount: 0,
     avatarUrl: req.body.avatarurl,
     bannerUrl: req.body.bannerurl,
     goals: [],
@@ -24,7 +28,7 @@ export async function buidlCreate(req: Request, res: Response) {
       }
     ],
     transactions: req.body.transactions || [],
-    proposals: req.body.proposals || [],
+    proposals: req.body.proposals || []
   };
 
   const isBuidl = await Buidl.findOne({ address: data.address });
@@ -65,7 +69,7 @@ export async function buidlCreate(req: Request, res: Response) {
   }
 
   user.buidls.push({
-    id: String(user.buidls.length +1),
+    id: String(user.buidls.length + 1),
     organisationId: String(buidl._id),
     joinedAt: Date.now().toString()
   });

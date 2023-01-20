@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { token } from 'src/enums/token';
 import { buidlInterface } from 'src/interfaces/buidl';
 
 export const buidlSchema = new mongoose.Schema({
@@ -12,6 +13,10 @@ export const buidlSchema = new mongoose.Schema({
   email: String,
   avatarUrl: String,
   bannerUrl: String,
+  amountRequested: String,
+  amountGranted: String,
+  token: token,
+  updatesCount: Number,
   goals: [
     {
       title: String,
@@ -41,16 +46,18 @@ export const buidlSchema = new mongoose.Schema({
       status: String
     }
   ],
-  proposals: [{
-    name: String,
-    purpose: String,
-    address: String,
-    amount: String,
-    upvotes: Number,
-    downvotes: Number,
-    endedAt: String,
-    buidlId: String,
-  }]
+  proposals: [
+    {
+      name: String,
+      purpose: String,
+      address: String,
+      amount: String,
+      upvotes: Number,
+      downvotes: Number,
+      endedAt: String,
+      buidlId: String
+    }
+  ]
 });
 
 export const Buidl = mongoose.model<buidlInterface>('buidls', buidlSchema);

@@ -1,4 +1,3 @@
-
 export interface userInterface {
   createdAt: string;
   updatedAt: string;
