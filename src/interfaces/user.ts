@@ -1,8 +1,10 @@
+import { Schema } from 'mongoose';
+
 export interface userInterface {
   createdAt: string;
   updatedAt: string;
   pubkey: string;
-  address:string;
+  address: string;
   name: string;
   email: string;
   avatarUrl: string;
@@ -12,7 +14,7 @@ export interface userInterface {
 
 export interface buildInterface {
   id: string;
-  organisationId: string;
+  organisationId: Schema.Types.ObjectId;
   joinedAt: string;
 }
 

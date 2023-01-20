@@ -43,4 +43,4 @@ export const buidlSchema = new mongoose.Schema({
   ]
 });
 
-export const Buidl: any = mongoose.model<buidlInterface>('buidls', buidlSchema);
+export const Buidl = mongoose.model<buidlInterface>('buidls', buidlSchema);

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import { userInterface } from '../interfaces/user';
 
 export const userSchema = new mongoose.Schema({
@@ -11,14 +11,14 @@ export const userSchema = new mongoose.Schema({
   avatarUrl: String,
   buidls: [
     {
-      id: String,
+      id: Schema.Types.ObjectId,
       organisationId: String,
       joinedAt: String
     }
   ],
   nfts: [
     {
-      id: String,
+      id: Schema.Types.ObjectId,
       url: String,
       mintedAt: String,
       buidlid: String,
