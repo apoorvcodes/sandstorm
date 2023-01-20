@@ -75,8 +75,7 @@ async function fetch() {
       'Content-Type': 'application/json'
     },
     data: {
-      _id: 'test',
-      name: 'test'
+      address: '0xapoo'
     }
   });
 }
