@@ -15,7 +15,8 @@ export async function buidlUpdate(req: Request, res: Response) {
     bannerUrl: req.body.bannerurl,
     goals: req.body.goals,
     members: req.body.members,
-    transactions: req.body.transactions
+    transactions: req.body.transactions,
+    proposals: req.body.proposals,
   };
 
   const buidl = await Buidl.findOne({ address: data.address });
@@ -28,8 +29,8 @@ export async function buidlUpdate(req: Request, res: Response) {
   }
 
   buidl.updatedAt = Date.now().toString();
-  buidl.transactions = data.transactions;
-  buidl.website = data.website || buidl.webiste;
+  buidl.transactions = data.transactions || buidl.transactions;
+  buidl.website = data.website || buidl.website;
   buidl.address = data.address || buidl.address;
   buidl.twitter = data.twitter || buidl.twitter;
   buidl.linkdin = data.linkdin || buidl.linkdin;
@@ -39,6 +40,7 @@ export async function buidlUpdate(req: Request, res: Response) {
   buidl.bannerUrl = data.bannerUrl || buidl.bannerUrl;
   buidl.goals = data.goals || buidl.goals;
   buidl.members = data.members || buidl.members;
+  buidl.proposals = data.proposals || buidl.proposals
 
   buidl.save().then(() => console.log('buidl has been updated!'));
 

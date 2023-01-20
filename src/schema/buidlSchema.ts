@@ -40,7 +40,17 @@ export const buidlSchema = new mongoose.Schema({
       message: String,
       status: String
     }
-  ]
+  ],
+  proposals: [{
+    name: String,
+    purpose: String,
+    address: String,
+    amount: String,
+    upvotes: Number,
+    downvotes: Number,
+    endedAt: String,
+    buidlId: String,
+  }]
 });
 
 export const Buidl = mongoose.model<buidlInterface>('buidls', buidlSchema);

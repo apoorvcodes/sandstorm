@@ -27,7 +27,6 @@ export async function userUpdate(req: Request, res: Response) {
   isUser.email = data.email || isUser.email;
   isUser.avatarUrl = data.avatarUrl || isUser.avatarUrl;
   isUser.buidls = data.buidls || isUser.buidls;
-  
 
   isUser.save().then(() => console.log('User has been updated'));
 

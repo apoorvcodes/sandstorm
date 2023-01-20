@@ -23,7 +23,8 @@ export async function buidlCreate(req: Request, res: Response) {
         joinedAt: Date.now().toString()
       }
     ],
-    transactions: req.body.transactions || []
+    transactions: req.body.transactions || [],
+    proposals: req.body.proposals || [],
   };
 
   const isBuidl = await Buidl.findOne({ address: data.address });
@@ -35,13 +36,13 @@ export async function buidlCreate(req: Request, res: Response) {
         createdAt: isBuidl.createdAt,
         updatedAt: isBuidl.updatedAt,
         address: isBuidl.address,
-        website: isBuidl.webiste,
+        website: isBuidl.website,
         twitter: isBuidl.twitter,
         linkdin: isBuidl.linkdin,
         github: isBuidl.github,
         email: isBuidl.email,
-        avatarUrl: isBuidl.avatarurl,
-        bannerUrl: isBuidl.bannerurl,
+        avatarUrl: isBuidl.avatarUrl,
+        bannerUrl: isBuidl.bannerUrl,
         goals: isBuidl.goals,
         members: isBuidl.members,
         transactions: isBuidl.transactions
@@ -64,8 +65,8 @@ export async function buidlCreate(req: Request, res: Response) {
   }
 
   user.buidls.push({
-    id: buidl._id,
-    organisationId: buidl._id,
+    id: String(user.buidls.length +1),
+    organisationId: String(buidl._id),
     joinedAt: Date.now().toString()
   });
 

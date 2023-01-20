@@ -14,7 +14,7 @@ export async function buidlRead(req: Request, res: Response) {
 
   res.status(200).json({
     status: 200,
-    data: buidl as buildInterface
+    data: buidl as unknown as buildInterface
   });
   console.log(buidl);
 }

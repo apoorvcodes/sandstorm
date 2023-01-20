@@ -62,4 +62,3 @@ export async function checkStatus(id: string): Promise<any> {
   console.log(res);
   return res.data;
 }
-

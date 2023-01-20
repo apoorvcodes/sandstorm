@@ -1,5 +1,5 @@
 import { transactionInterface } from './transaction';
-
+import { token } from 'src/enums/token';
 export interface buidlInterface {
   createdAt: string;
   updatedAt: string;
@@ -11,9 +11,14 @@ export interface buidlInterface {
   email: string;
   avatarUrl: string;
   bannerUrl: string;
+  amountRequested: string,
+  amountGranted: string,
+  token: token,
+  updatesCount: number,
   goals: goalInterface[];
   members: memberInterface[];
   transactions: transactionInterface[];
+  proposals: proposalInterface[];
 }
 
 interface goalInterface {
@@ -28,4 +33,15 @@ interface memberInterface {
   index: number;
   userID: string;
   joinedAt: string;
+}
+
+interface proposalInterface {
+  name: string;
+  purpose: string;
+  address: string;
+  amount: string;
+  upvotes: number;
+  downvotes: number;
+  endedAt: string;
+  buidlId: string;
 }
