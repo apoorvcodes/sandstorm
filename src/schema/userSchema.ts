@@ -5,6 +5,7 @@ export const userSchema = new mongoose.Schema({
   createdAt: String,
   updatedAt: String,
   pubkey: String,
+  address: String,
   name: String,
   email: String,
   avatarUrl: String,

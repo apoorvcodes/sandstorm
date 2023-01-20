@@ -78,6 +78,7 @@ async function fetch() {
       address: '0xapoo'
     }
   });
+  console.log(res)
 }
 
 fetch();

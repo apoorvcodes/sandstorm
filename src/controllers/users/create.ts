@@ -4,9 +4,9 @@ import { userInterface } from 'src/interfaces/user';
 
 export async function userCreate(req: Request, res: Response) {
   const data: userInterface = {
+    address: req.body.address,
     createdAt: Date.now().toString(),
     updatedAt: Date.now().toString(),
-    address: req.body.address,
     pubkey: req.body.pubkey,
     name: req.body.name,
     email: req.body.email,
@@ -39,5 +39,5 @@ export async function userCreate(req: Request, res: Response) {
     status: 200,
     data: newUser
   });
-  console.log(newUser);
+  console.log(newUser.address);
 }
